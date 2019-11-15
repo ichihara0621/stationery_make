@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :cart
+  
   MAX_NAME_LEN = 50
   MAX_EMAIL_LEN = 255
   MAX_PASS_LEN = 15

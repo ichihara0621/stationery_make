@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191113104819) do
+ActiveRecord::Schema.define(version: 20191115031614) do
 
   create_table "buy_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "count"
-    t.integer "send_status"
-    t.integer "receive"
     t.bigint "stationery_id"
     t.bigint "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "send_status"
+    t.boolean "receive"
     t.index ["cart_id"], name: "index_buy_items_on_cart_id"
     t.index ["stationery_id"], name: "index_buy_items_on_stationery_id"
   end
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 20191113104819) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rankings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "total_count"
+    t.bigint "stationery_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stationery_id"], name: "index_rankings_on_stationery_id"
+  end
+
   create_table "stationeries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "price"
@@ -39,6 +53,25 @@ ActiveRecord::Schema.define(version: 20191113104819) do
     t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "stat_create"
+    t.index ["name"], name: "stat_name"
+  end
+
+  create_table "stationery_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "stationery_id"
+    t.bigint "ranking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ranking_id"], name: "index_stationery_categories_on_ranking_id"
+    t.index ["stationery_id"], name: "index_stationery_categories_on_stationery_id"
+  end
+
+  create_table "stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "count"
+    t.bigint "stationery_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stationery_id"], name: "index_stocks_on_stationery_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -48,9 +81,15 @@ ActiveRecord::Schema.define(version: 20191113104819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
+    t.integer "status"
+    t.index ["email"], name: "email_index"
   end
 
   add_foreign_key "buy_items", "carts"
   add_foreign_key "buy_items", "stationeries"
   add_foreign_key "carts", "users"
+  add_foreign_key "rankings", "stationeries"
+  add_foreign_key "stationery_categories", "rankings"
+  add_foreign_key "stationery_categories", "stationeries"
+  add_foreign_key "stocks", "stationeries"
 end

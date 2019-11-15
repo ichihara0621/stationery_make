@@ -1,5 +1,6 @@
 class Stationery < ApplicationRecord
     has_many :buy_item
+    has_many :stationery_category
     validates :name, presence: true,
                uniqueness: true
     validates :price, presence: true
@@ -12,5 +13,5 @@ class Stationery < ApplicationRecord
       else
         Stationery.all
       end
-  end
+    end
 end
