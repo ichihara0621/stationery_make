@@ -1,0 +1,22 @@
+<% provide(:title, "Userspage") %>
+<div class="row">
+  <aside class="col-md-4">
+<h1>
+  <%= @stationery.name %>
+</h1>
+　　<p>price:
+　　  <%= @stationery.price %>
+     <br>
+     maker:
+　　  <%= @stationery.maker %>
+    <br>
+     detail:
+　　  <%= @stationery.detail %>
+     
+　　  <ul class="stationeries">  
+　　  <li><%= link_to "Cartに", edit_user_path %></li>
+     
+　　  </ul> 
+　　</p>
+</aside>
+</div>

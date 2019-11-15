@@ -1,0 +1,29 @@
+<% provide(:title, 'All Stationery') %>
+<h1>All Stationery</h1>
+
+<%= will_paginate %>
+
+<ul class="stationery">
+<br>
+  <p>stationery search</p>
+  
+   
+  
+<br>
+
+    <% if @stationery.length == 0 %>
+    <h2>Not Found</h2>
+    <% else %>
+     <% @stationery.each do |stationery| %>
+  
+    <li class ="name">
+
+      <%= link_to stationery.name, stationery %>
+      <br>
+    </li>
+   <% end %>
+  <% end %>
+
+</ul>
+
+<%= will_paginate %>

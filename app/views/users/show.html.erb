@@ -1,12 +1,18 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, "Userspage") %>
 <div class="row">
   <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= @user.name %>
-        <%= link_to "user information", , class: "btn btn-lg btn-primary" %>
-        <%= link_to "cart", , class: "btn btn-lg btn-primary" %>
-      </h1>
-    </section>
-  </aside>
+<h1>
+  <%= @user.name %>
+</h1>
+　　<p>email:
+　　  <%= @user.email %>
+     <br>
+     address:
+　　  <%= @user.address %>
+　　  <ul class="users">  
+　　  <li><%= link_to "Edit user", edit_user_path %></li>
+     <li><%= link_to "Buy Items", edit_user_path %></li>
+　　  </ul> 
+　　</p>
+</aside>
 </div>
