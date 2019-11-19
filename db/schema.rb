@@ -10,18 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191115031614) do
+ActiveRecord::Schema.define(version: 20191118100609) do
 
   create_table "buy_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "count"
+    t.boolean "send_status", default: true
+    t.boolean "receive", default: true
+    t.bigint "user_id"
     t.bigint "stationery_id"
     t.bigint "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "send_status"
-    t.boolean "receive"
     t.index ["cart_id"], name: "index_buy_items_on_cart_id"
     t.index ["stationery_id"], name: "index_buy_items_on_stationery_id"
+    t.index ["user_id"], name: "index_buy_items_on_user_id"
   end
 
   create_table "carts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -53,16 +55,14 @@ ActiveRecord::Schema.define(version: 20191115031614) do
     t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "stat_create"
-    t.index ["name"], name: "stat_name"
   end
 
   create_table "stationery_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "stationery_id"
-    t.bigint "ranking_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ranking_id"], name: "index_stationery_categories_on_ranking_id"
+    t.index ["category_id"], name: "index_stationery_categories_on_category_id"
     t.index ["stationery_id"], name: "index_stationery_categories_on_stationery_id"
   end
 
@@ -82,14 +82,16 @@ ActiveRecord::Schema.define(version: 20191115031614) do
     t.datetime "updated_at", null: false
     t.string "address"
     t.integer "status"
-    t.index ["email"], name: "email_index"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_foreign_key "buy_items", "carts"
   add_foreign_key "buy_items", "stationeries"
+  add_foreign_key "buy_items", "users"
   add_foreign_key "carts", "users"
   add_foreign_key "rankings", "stationeries"
-  add_foreign_key "stationery_categories", "rankings"
+  add_foreign_key "stationery_categories", "categories"
   add_foreign_key "stationery_categories", "stationeries"
   add_foreign_key "stocks", "stationeries"
 end

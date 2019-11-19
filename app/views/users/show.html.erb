@@ -9,6 +9,14 @@
      <br>
      address:
 　　  <%= @user.address %>
+
+     
+  <% if @user.status == 0 %>
+    | <%= link_to "delete", stationery_path, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+      <li><%= link_to "Stop receive", edit_user_path %></li>
+  <% end %>
+
 　　  <ul class="users">  
 　　  <li><%= link_to "Edit user", edit_user_path %></li>
      <li><%= link_to "Buy Items", edit_user_path %></li>

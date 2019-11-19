@@ -12,6 +12,31 @@
     <br>
      detail:
 　　  <%= @stationery.detail %>
+
+     <div class="col-md-8">
+    
+      <h3>Microposts 
+      <%= @stationery.categories.each do |categories| %>
+       </h3>
+             <%= @stationery.categories.name %>
+
+      <ol class="microposts">
+        <% end %>
+<h3>aiu</h3>
+        <% @stationery.categories.each do |category| %>
+    <%= category.name %>
+    
+<% end %>
+      </ol>
+      
+    
+  </div>
+     <li class ="name">
+
+      
+      <br>
+    </li>
+   
      
 　　  <ul class="stationeries">  
 　　  <li><%= link_to "Cartに", edit_user_path %></li>

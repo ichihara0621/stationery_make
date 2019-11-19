@@ -1,4 +1,7 @@
 class StationeryCategory < ApplicationRecord
   belongs_to :stationery
-  belongs_to :ranking
+  belongs_to :category
+
+  
+
 end

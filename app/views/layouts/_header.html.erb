@@ -23,6 +23,16 @@
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
         <% end %>
+        </ul>
+        <br>
+          <li><%= label_tag :name, "Pen" %>
+          <%= link_to "File", stationery_index_path %>
+          <%= link_to "Pencase", stationery_index_path %>
+          <%= link_to "Notebook", stationery_index_path %>
+          <%= link_to "Album", stationery_index_path %>
+          <%= link_to "Diary", stationery_index_path %>
+          <%= link_to "Eraser", stationery_index_path %></li>
+
       </ul>
     </nav>
   </div>

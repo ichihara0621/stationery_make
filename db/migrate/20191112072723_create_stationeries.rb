@@ -5,7 +5,7 @@ class CreateStationeries < ActiveRecord::Migration[5.1]
       t.integer :price
       t.string :maker
       t.text :detail
-
+      
       t.timestamps
     end
   end

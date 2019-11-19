@@ -6,6 +6,16 @@
     <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
     sample application.
   </h2>
+  <% if logged_in? %>
+          
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete %>
+              </li>
+            
+          
+        <% else %>
+          <li><%= link_to "Log in", login_path %></li>
+        <% end %>
   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
 </div>
 
