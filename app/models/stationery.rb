@@ -1,19 +1,16 @@
 class Stationery < ApplicationRecord
-    has_many :buy_items
-    has_many :stationery_categories
+    has_many :buy_items, dependent: :destroy
+    has_many :stationery_categories, dependent: :destroy
     has_many :categories, through: :stationery_categories
-    has_one  :stock
+    accepts_nested_attributes_for :stationery_categories, allow_destroy: true
+    has_one  :stock, dependent: :destroy
+    accepts_nested_attributes_for :stock, allow_destroy: true
     validates :name, presence: true,
                uniqueness: true
     validates :price, presence: true
     validates :maker, presence: true
     validates :detail, presence: true
     
-    sta_cate = Stationery.joins(stationery_categories: :category)
-    
-    def self.foo
-       Stationery.joins(stationery_categories: :category).select("stationeries.*, categories.*")
-    end
 
     def self.search(search)
       if search

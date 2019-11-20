@@ -25,14 +25,22 @@
         <% end %>
         </ul>
         <br>
-          <li><%= label_tag :name, "Pen" %>
+          <li><%= link_to "Pen", stationery_index_path %>
           <%= link_to "File", stationery_index_path %>
           <%= link_to "Pencase", stationery_index_path %>
           <%= link_to "Notebook", stationery_index_path %>
           <%= link_to "Album", stationery_index_path %>
           <%= link_to "Diary", stationery_index_path %>
           <%= link_to "Eraser", stationery_index_path %></li>
-
+          
+          <div class="row">
+  <
+          <div class="field">
+    
+    <%= form_for.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+        <%= b.check_box + b.label %>
+    <% end %>
+    
       </ul>
     </nav>
   </div>

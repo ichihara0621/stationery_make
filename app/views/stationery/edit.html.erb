@@ -1,11 +1,10 @@
-<% provide(:title, 'Create Stationery') %>
-<h1>Create Stationery</h1>
-
+<% provide(:title, "Edit Stationery") %>
+<h1>Update Stationery</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@stationery, url: insert_path) do |f| %>
+    <%= form_for(@stationery) do |f| %>
       <%= render 'shared/stock_form' %>
-
+      
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
@@ -18,7 +17,7 @@
       <%= f.label :maker %>
       <%= f.text_field :maker, class: 'form-control' %>
       
-         <%= f.fields_for :stock do |i| %>
+      <%= f.fields_for :stock do |i| %>
    
          <%= i.label :stock %>
          <%= i.number_field :count, class: 'form-control' %>
@@ -29,10 +28,8 @@
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
         <%= b.check_box + b.label %>
     <% end %>
-  </div>
-    
-
-      <%= f.submit "Create new stationery", class: "btn btn-primary" %>
+    </div>
+      <%= f.submit "Update", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

@@ -105,14 +105,14 @@
  #                          category_id: 7015)
 
 #1001.times do |n|
-category_id = rand(7015..7021)
-for n in (3..1001)
-  #stationery_id = n
-  
-
- StationeryCategory.create!(stationery_id: n,
-                            category_id: category_id)
-end
+#category_id = rand(7015..7021)
+#for n in (3..1001)
+#  #stationery_id = n
+#  
+#
+# StationeryCategory.create!(stationery_id: n,
+#                            category_id: category_id)
+#end
 
 
 

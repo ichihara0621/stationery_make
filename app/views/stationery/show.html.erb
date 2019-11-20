@@ -12,36 +12,24 @@
     <br>
      detail:
 　　  <%= @stationery.detail %>
+    <br>
+     category:
+      <% @stationery.categories.each do |categories| %>
+       <%= categories.name %>
+      <% end %>
 
-     <div class="col-md-8">
-    
-      <h3>Microposts 
-      <%= @stationery.categories.each do |categories| %>
-       </h3>
-             <%= @stationery.categories.name %>
-
-      <ol class="microposts">
-        <% end %>
-<h3>aiu</h3>
-        <% @stationery.categories.each do |category| %>
-    <%= category.name %>
-    
-<% end %>
-      </ol>
-      
-    
-  </div>
-     <li class ="name">
-
-      
       <br>
-    </li>
-   
+      <br>
+      <%= link_to "delete", @stationery, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+      <br>
+      <%= link_to "edit", edit_stationery_path %>
+      </ol>
+  </div>
      
-　　  <ul class="stationeries">  
+      <br>
 　　  <li><%= link_to "Cartに", edit_user_path %></li>
-     
-　　  </ul> 
+     <li><%= link_to "一覧", stationery_index_path %></li>
 　　</p>
 </aside>
 </div>
