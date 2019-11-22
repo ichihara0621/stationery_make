@@ -1,7 +1,6 @@
 class StationeryController < ApplicationController
   
   def show
-    
     @stationery = Stationery.find(params[:id])
     @buy_item = BuyItem.new
   end
@@ -49,7 +48,7 @@ class StationeryController < ApplicationController
     @buy_item = BuyItem.new(add_params)
     if @buy_item.save
       flash[:success] = "Buy Create"
-      redirect_to @buy_item
+      redirect_to buy_items_path
     else
       render 'new'
     end 

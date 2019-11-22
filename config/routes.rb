@@ -14,9 +14,8 @@ Rails.application.routes.draw do
   get  '/bought',  to: 'users#bought'
   #get   '/add',    to: 'stationery#incart'
   post  '/add',    to: 'stationery#add'
-
+  post  '/buy',    to: 'buy_items#change'
   resources :stationery
   resources :password_resets
-  resources :carts
   resources :buy_items
 end

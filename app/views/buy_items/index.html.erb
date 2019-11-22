@@ -4,14 +4,17 @@
   <p>
      Stationery Name:
      <br>
-      <%= hidden_field_tag :user_id, :value => current_user.id %>
+     
+    <% @buy_item.each do |item| %>
+    <%= item.count %>
 
-     <%= @buy_item.count %>
-    
 
+<% end %>
       <br>
       <br>
-      
+<%= link_to "購入確定", buy_items_path, :method => 'post',
+                                  data: { confirm: "You sure?" } %>
+      <br>
       </ol>
   </div>
      
