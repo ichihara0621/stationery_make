@@ -18,7 +18,7 @@
 #               password_confirmation: password,
 #               status: status)
 #end
-
+#
 #Stationery.create!(name:  "pentel pen",
 #                   price: "100",
 #                   maker: "pentel",
@@ -36,31 +36,21 @@
 #                     maker: maker,
 #                     detail: detail)
 #end
+#
 
-#cart
-#100.times do |n|
-#  total_price = rand(1..100)*100
-#  user_id = rand(1..100)
-#  
-#
-#  Cart.create!(total_price: total_price,
-#               user_id: user_id)
-#end
-#
-##buy_item
-#1000.times do |n|
-#  count = rand(1..100)*100
+
+#buy_item
+#5.times do |n|
+#  count = rand(1..10)
 #  send_status = true
 #  receive = true
 #  stationery_id = rand(1..1000)
-#  cart_id = rand(1..100)
-#  user_id = rand(1..100)
+#  user_id = 5
 #
 #  BuyItem.create!(count: count,
 #                   send_status: send_status,
 #                   receive: receive,
 #                   stationery_id: stationery_id,
-#                   cart_id: cart_id,
 #                   user_id: user_id)
 #end
 
@@ -89,30 +79,27 @@
 #stocks
 #Stock.create!(count: 500,
 #              stationery_id: 1)
-
-#1001.times do |n|
+#
 #for n in (2..1001)
 #  count = rand(50..1000)
-#  #stationery_id = n
-#
+#  
 # Stock.create!(count: count,
 #              stationery_id: n)
 #end
 
 
 #stationery_category
-#StationeryCategory.create!(stationery_id: 1,
- #                          category_id: 7015)
-
+StationeryCategory.create!(stationery_id: 1,
+                           category_id: 5)
 #1001.times do |n|
-#category_id = rand(7015..7021)
-#for n in (3..1001)
-#  #stationery_id = n
-#  
-#
-# StationeryCategory.create!(stationery_id: n,
-#                            category_id: category_id)
-#end
+category_id = rand(1..7)
+for n in (2..1001)
+  #stationery_id = n
+  
+
+ StationeryCategory.create!(stationery_id: n,
+                            category_id: category_id)
+end
 
 
 

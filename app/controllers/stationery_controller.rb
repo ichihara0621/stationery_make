@@ -1,7 +1,9 @@
 class StationeryController < ApplicationController
   
   def show
+    
     @stationery = Stationery.find(params[:id])
+    @buy_item = BuyItem.new
   end
 
   def new
@@ -10,20 +12,7 @@ class StationeryController < ApplicationController
   end
   
   def index
-    #@stationery = Stationery.paginate(page: params[:page]).search(params[:search]).order(created_at: "DESC")
-     if params[:category_id]
-      # Categoryのデータベースのテーブルから一致するidを取得
-      @category = Category.find(params[:category_id])
-       
-      # category_idと紐づく投稿を取得
-      @stationery = @category.stationery.order(created_at: :desc).all
-    else
-      # 投稿すべてを取得
-      @stationery = Stationery.paginate(page: params[:page]).search(params[:search]).order(created_at: "DESC")
-    end
-    #if params[:category].present?
-    #  @stationery = Stationery.paginate(page: params[:page]).search(params[:category]).order(created_at: "DESC")
-    # end
+    @stationery = Stationery.paginate(page: params[:page]).search(params[:search]).order(created_at: "DESC")
   end
 
   def destroy
@@ -56,7 +45,15 @@ class StationeryController < ApplicationController
     end
   end
 
-
+  def add 
+    @buy_item = BuyItem.new(add_params)
+    if @buy_item.save
+      flash[:success] = "Buy Create"
+      redirect_to @buy_item
+    else
+      render 'new'
+    end 
+  end
 
   private
 
@@ -64,7 +61,9 @@ class StationeryController < ApplicationController
     params.require(:stationery).permit(:name, :price, :detail, :maker, category_ids: [],
     stock_attributes: [:id, :count])
   end
-  
-  
 
+  def add_params
+    params.require(:buy_item).permit(:count, :stationery_id, :user_id)
+  end
+  
 end

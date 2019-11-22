@@ -1,5 +1,6 @@
 class Stationery < ApplicationRecord
     has_many :buy_items, dependent: :destroy
+    accepts_nested_attributes_for :buy_items
     has_many :stationery_categories, dependent: :destroy
     has_many :categories, through: :stationery_categories
     accepts_nested_attributes_for :stationery_categories, allow_destroy: true
@@ -16,6 +17,9 @@ class Stationery < ApplicationRecord
       if search
         Stationery.where(['name LIKE ?', "%#{search}%"])
       
+      #elsif
+      #  Stationery.where(category_ids = )
+#
       else
         Stationery.all
         

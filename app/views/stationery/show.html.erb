@@ -28,7 +28,21 @@
   </div>
      
       <br>
-　　  <li><%= link_to "Cartに", edit_user_path %></li>
+　　  
+
+    <%= form_for(@buy_item, url: add_path, :method => 'post') do |f| %>
+        <%= f.hidden_field :stationery_id, :value => @stationery.id %>
+
+
+     
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+        <%= f.label :count %>
+        <%= f.number_field :count, class: 'form-control' %>
+      
+      <%= f.submit "Order", class: "btn btn-primary" %>
+         <% end %>
+         
      <li><%= link_to "一覧", stationery_index_path %></li>
 　　</p>
 </aside>

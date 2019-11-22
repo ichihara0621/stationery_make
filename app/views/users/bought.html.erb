@@ -1,0 +1,30 @@
+<% provide(:title, "Bought Items") %>
+<div class="row">
+  <aside class="col-md-4">
+  <p>
+  <%= @user.name %>
+  <br>
+     
+     <br>
+     <% @user.stationeries.each do |items| %>
+     Stationery Name:
+     <%= items.name %>
+   <br>
+　　price:
+　　  <%= items.price %>
+     <br>
+     
+     <% end %>
+    total price
+
+      <br>
+      <br>
+      
+      </ol>
+  </div>
+     
+      <br><li><%= link_to "Cartに", stationery_index_path %></li>
+     <li><%= link_to "一覧", stationery_index_path %></li>
+　　</p>
+</aside>
+</div>

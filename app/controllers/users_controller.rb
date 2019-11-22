@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    
   end
   
   def new
@@ -31,6 +30,11 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def bought
+    @user = current_user
+
   end
 
   # パスワード再設定の属性を設定する

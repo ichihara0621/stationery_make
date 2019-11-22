@@ -18,7 +18,7 @@
       <li><%= link_to "Delete Stationery", stationery_path, method: :delete, data: { confirm: "You sure?" } %></li>
   <% elsif @user.status == 1 %>
     <li><%= link_to "Edit user", edit_user_path %></li>
-     <li><%= link_to "Buy Items", edit_user_path %></li>
+     <li><%= link_to "Buy Items", bought_path %></li>
   <% else @user.status == 2 %>
     <li><%= link_to "Edit user", edit_user_path %></li>
      <li><%= link_to "Buy Items", edit_user_path %></li>

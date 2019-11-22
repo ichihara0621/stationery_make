@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
 
   root 'static_pages#home'
   get  '/help',    to: 'static_pages#help'
@@ -14,6 +11,12 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get  '/insert',  to: 'stationery#new'
   post '/insert',  to: 'stationery#create'
+  get  '/bought',  to: 'users#bought'
+  #get   '/add',    to: 'stationery#incart'
+  post  '/add',    to: 'stationery#add'
+
   resources :stationery
   resources :password_resets
+  resources :carts
+  resources :buy_items
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191118100609) do
+ActiveRecord::Schema.define(version: 20191122050644) do
 
   create_table "buy_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "count"
@@ -18,20 +18,11 @@ ActiveRecord::Schema.define(version: 20191118100609) do
     t.boolean "receive", default: true
     t.bigint "user_id"
     t.bigint "stationery_id"
-    t.bigint "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_buy_items_on_cart_id"
+    t.integer "paid_number_id"
     t.index ["stationery_id"], name: "index_buy_items_on_stationery_id"
     t.index ["user_id"], name: "index_buy_items_on_user_id"
-  end
-
-  create_table "carts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "total_price"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -86,10 +77,8 @@ ActiveRecord::Schema.define(version: 20191118100609) do
     t.datetime "reset_sent_at"
   end
 
-  add_foreign_key "buy_items", "carts"
   add_foreign_key "buy_items", "stationeries"
   add_foreign_key "buy_items", "users"
-  add_foreign_key "carts", "users"
   add_foreign_key "rankings", "stationeries"
   add_foreign_key "stationery_categories", "categories"
   add_foreign_key "stationery_categories", "stationeries"

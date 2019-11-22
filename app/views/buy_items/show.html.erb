@@ -1,0 +1,21 @@
+<% provide(:title, "注文商品") %>
+<div class="row">
+  <aside class="col-md-4">
+  <p>
+     Stationery Name:
+     <br>
+      <%= hidden_field_tag :user_id, :value => current_user.id %>
+
+     <%= @buy_item.count %>
+    
+
+      <br>
+      <br>
+      
+      </ol>
+  </div>
+     
+      <br><li><%= link_to "商品一覧へ", stationery_index_path %></li>
+　　</p>
+</aside>
+</div>

@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  has_many :carts
-  has_many :buy_items
+  has_many :stationeries, through: :buy_items
 
   MAX_NAME_LEN = 50
   MAX_EMAIL_LEN = 255
