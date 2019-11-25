@@ -1,0 +1,21 @@
+<% provide(:title, 'All Stationery') %>
+<h1>Stationery Ranking</h1>
+
+<%= will_paginate %>
+
+<ul class="stationery">
+<br>
+ 
+<br>    
+     <% @rankings.each do |stationery| %>
+  
+    <li class ="name">
+
+      <%= link_to stationery.total_count %>
+      <br>
+    </li>
+  <% end %>
+
+</ul>
+
+<%= will_paginate %>

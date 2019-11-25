@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :stationeries, through: :buy_items
+  has_many :buy_items, dependent: :destroy
+  accepts_nested_attributes_for :buy_items
 
   MAX_NAME_LEN = 50
   MAX_EMAIL_LEN = 255

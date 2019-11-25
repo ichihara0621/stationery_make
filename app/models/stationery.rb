@@ -1,4 +1,5 @@
 class Stationery < ApplicationRecord
+    has_many :users, through: :buy_items
     has_many :buy_items, dependent: :destroy
     accepts_nested_attributes_for :buy_items
     has_many :stationery_categories, dependent: :destroy

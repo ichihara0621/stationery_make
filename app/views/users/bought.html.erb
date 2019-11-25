@@ -6,16 +6,26 @@
   <br>
      
      <br>
-     <% @user.stationeries.each do |items| %>
+     <% @user.buy_items.each do |items| %>
      Stationery Name:
-     <%= items.name %>
+     <%= items.stationery.name %>
    <br>
 　　price:
-　　  <%= items.price %>
+　　  <%= items.stationery.price %>
      <br>
+     count:
+     <%= items.count %>
+     <br>
+     date:
+     <%= items.created_at%>
+     <br>
+     total price
+     <%= items.count*items.stationery.price %>
+     <br><br>
+     
      
      <% end %>
-    total price
+    
 
       <br>
       <br>
@@ -23,7 +33,6 @@
       </ol>
   </div>
      
-      <br><li><%= link_to "Cartに", stationery_index_path %></li>
      <li><%= link_to "一覧", stationery_index_path %></li>
 　　</p>
 </aside>

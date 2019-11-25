@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :stationery
   resources :password_resets
   resources :buy_items
+  resources :rankings
 end
