@@ -23,6 +23,12 @@
          <%= i.label :stock %>
          <%= i.number_field :count, class: 'form-control' %>
          <% end %>
+
+         <%= f.fields_for :ranking do |i| %>
+   
+         <%= i.label :ranking_total_count %>
+         <%= i.number_field :total_count, class: 'form-control' %>
+         <% end %>
       
       <div class="field">
     <%= f.label :category %>

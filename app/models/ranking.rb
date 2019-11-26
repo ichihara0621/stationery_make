@@ -1,4 +1,3 @@
 class Ranking < ApplicationRecord
-  belongs_to :stationery
-  has_many :stationeries
+  has_one :stationery
 end

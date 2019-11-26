@@ -89,17 +89,23 @@
 
 
 #stationery_category
-StationeryCategory.create!(stationery_id: 1,
-                           category_id: 5)
+#StationeryCategory.create!(stationery_id: 1,
+#                           category_id: 5)
 #1001.times do |n|
-category_id = rand(1..7)
-for n in (2..1001)
-  #stationery_id = n
-  
+#category_id = rand(1..7)
+#for n in (2..1001)
+#  #stationery_id = n
+#  
+#
+# StationeryCategory.create!(stationery_id: n,
+#                            category_id: category_id)
+#end
 
- StationeryCategory.create!(stationery_id: n,
-                            category_id: category_id)
+#ranking
+for n in (2..1007)
+Ranking.create!(total_count: 0,
+                stationery_id: n)
+
 end
-
 
 

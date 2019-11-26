@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :stationeries, through: :buy_items
-  has_many :buy_items, dependent: :destroy
+  has_many :buy_items, dependent: :destroy # source: :buy_items
   accepts_nested_attributes_for :buy_items
 
   MAX_NAME_LEN = 50

@@ -8,6 +8,7 @@ class StationeryController < ApplicationController
   def new
     @stationery = Stationery.new
     @stationery.build_stock
+    @stationery.build_ranking
   end
   
   def index
@@ -22,6 +23,7 @@ class StationeryController < ApplicationController
   
   def create
     @stationery = Stationery.new(stationery_params)
+    
     if @stationery.save
       flash[:success] = "Stationery Create"
       redirect_to stationery_url(@stationery)
@@ -58,7 +60,7 @@ class StationeryController < ApplicationController
 
   def stationery_params
     params.require(:stationery).permit(:name, :price, :detail, :maker, category_ids: [],
-    stock_attributes: [:id, :count])
+    stock_attributes: [:id, :count], ranking_attributes: [:id, :total_count])
   end
 
   def add_params

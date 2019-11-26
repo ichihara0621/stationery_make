@@ -1,7 +1,9 @@
 <% provide(:title, "Userspage") %>
 <div class="row">
   <aside class="col-md-4">
-<h1>
+
+  <% if @user.status == 0 %>
+  <h1>
   <%= @user.name %>
 </h1>
 　　<p>email:
@@ -9,20 +11,24 @@
      <br>
      address:
 　　  <%= @user.address %>
-
-     
-  <% if @user.status == 0 %>
       <li><%= link_to "Stop receive", edit_user_path %></li>
       <li><%= link_to "Add Stationery", insert_path %></li>
       <li><%= link_to "Edit Stationery", edit_stationery_path %></li>
       <li><%= link_to "Delete Stationery", stationery_path, method: :delete, data: { confirm: "You sure?" } %></li>
-  <% elsif @user.status == 1 %>
+  <% else @user.status == 1 %>
+  <h1>
+  <%= @user.name %>
+</h1>
+　　<p>email:
+　　  <%= @user.email %>
+     <br>
+     address:
+　　  <%= @user.address %>
     <li><%= link_to "Edit user", edit_user_path %></li>
      <li><%= link_to "Buy Items", bought_path %></li>
      <li><%= link_to "Cart", buy_items_path %></li>
-  <% else @user.status == 2 %>
-    <li><%= link_to "Edit user", edit_user_path %></li>
-     <li><%= link_to "Buy Items", edit_user_path %></li>
+     <li><%= link_to "退会する", leave_path, :method => 'post', data: { confirm: "You sure?" } %></li>
+     
   <% end %>
 
 　　  

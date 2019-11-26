@@ -33,8 +33,19 @@ class UsersController < ApplicationController
   end
 
   def bought
-    @user = current_user
+    from = Time.now - 1.hour
+    to = Time.now
+    @buy_items = current_user.buy_items.paginate(page: params[:page]).order(created_at: "DESC").where(created_at: from..to)
+  end
 
+  def leave
+    user = current_user
+    if user.update_attribute(:status, 2)
+       flash[:success] = "またのご利用お待ちしております。"
+       redirect_to stationery_index_path
+    else
+      render 'new'
+    end
   end
 
   # パスワード再設定の属性を設定する
@@ -50,6 +61,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :address, :password,
                                    :password_confirmation)
     end
+
+    
 
     def logged_in_user
       unless logged_in?

@@ -2,15 +2,16 @@
 <div class="row">
   <aside class="col-md-4">
   <p>
-  <%= @user.name %>
+  <%= current_user.name %>
   <br>
      
      <br>
-     <% @user.buy_items.each do |items| %>
+     <% @buy_items.each do |items| %>
+
      Stationery Name:
      <%= items.stationery.name %>
-   <br>
-　　price:
+    <br>
+     price:
 　　  <%= items.stationery.price %>
      <br>
      count:
@@ -20,10 +21,10 @@
      <%= items.created_at%>
      <br>
      total price
-     <%= items.count*items.stationery.price %>
-     <br><br>
-     
-     
+     <%= items.count*items.stationery.price %> 
+
+   <%= submit_tag "注文取消し", class: "btn btn-primary" %>
+   <br><br><br>
      <% end %>
     
 

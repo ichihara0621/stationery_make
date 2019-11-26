@@ -7,6 +7,8 @@ class Stationery < ApplicationRecord
     accepts_nested_attributes_for :stationery_categories, allow_destroy: true
     has_one  :stock, dependent: :destroy
     accepts_nested_attributes_for :stock, allow_destroy: true
+    has_one  :ranking, dependent: :destroy
+    accepts_nested_attributes_for :ranking, allow_destroy: true
     validates :name, presence: true,
                uniqueness: true
     validates :price, presence: true
