@@ -1,21 +1,29 @@
-<% provide(:title, 'All Stationery') %>
-<h1>Stationery Ranking</h1>
+<% provide(:title, "Ranking") %>
+<div class="row">
+  <aside class="col-md-4">
+  <p>
+  <br>
+     
+     <br>
+     <% @rankings.each do |stationery_sum| %>
 
-<%= will_paginate %>
+     
+     
+     count:
+     <%= stationery_sum.total_count %>
+     <br>
+        <br><br><br>
+     <% end %>
 
-<ul class="stationery">
-<br>
- 
-<br>    
-     <% @rankings.each do |stationery| %>
-  
-    <li class ="name">
+    
 
-      <%= link_to stationery.total_count %>
       <br>
-    </li>
-  <% end %>
-
-</ul>
-
-<%= will_paginate %>
+      <br>
+      
+      </ol>
+  </div>
+     
+     <li><%= link_to "一覧", stationery_index_path %></li>
+　　</p>
+</aside>
+</div>

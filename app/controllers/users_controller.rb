@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def bought
-    from = Time.now - 1.hour
+    from = Time.now - 24.hour
     to = Time.now
     @buy_items = current_user.buy_items.paginate(page: params[:page]).order(created_at: "DESC").where(created_at: from..to)
   end
@@ -43,6 +43,19 @@ class UsersController < ApplicationController
     if user.update_attribute(:status, 2)
        flash[:success] = "またのご利用お待ちしております。"
        redirect_to stationery_index_path
+    else
+      render 'new'
+    end
+  end
+
+
+  def cancel
+    #user = current_user
+    debugger
+    buy_items = BuyItem.find(params[:id])
+    if buy_items.update_attribute(:receive, fault)
+       flash[:success] = "注文を取り消しました"
+       redirect_to bought_path
     else
       render 'new'
     end

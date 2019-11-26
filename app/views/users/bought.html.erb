@@ -22,10 +22,13 @@
      <br>
      total price
      <%= items.count*items.stationery.price %> 
+    <br>
+        <%= hidden_field_tag :id, @buy_items.id %>
 
-   <%= submit_tag "注文取消し", class: "btn btn-primary" %>
+        <%= link_to "注文取消し", cancel_path, :method => 'post', data: { confirm: "You sure?" } %>
    <br><br><br>
      <% end %>
+
     
 
       <br>
