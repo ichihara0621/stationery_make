@@ -9,11 +9,16 @@ class Stationery < ApplicationRecord
     accepts_nested_attributes_for :stock, allow_destroy: true
     has_one  :ranking, dependent: :destroy
     accepts_nested_attributes_for :ranking, allow_destroy: true
-    validates :name, presence: true,
+    
+    MAX_NAME_LEN = 50
+    MAX_PRICE_LEN = 6
+    MAX_MAKER_LEN = 50
+    MAX_DETAIL_LEN = 250
+    validates :name, presence: true, length: { maximum: MAX_NAME_LEN },
                uniqueness: true
-    validates :price, presence: true
-    validates :maker, presence: true
-    validates :detail, presence: true
+    validates :price, presence: true, length: { maximum: MAX_PRICE_LEN }
+    validates :maker, presence: true, length: { maximum: MAX_MAKER_LEN }
+    validates :detail, presence: true, length: { maximum: MAX_DETAIL_LEN }
     
 
     def self.search(search)

@@ -25,7 +25,7 @@
 　　  <%= @user.address %>
     <li><%= link_to "Edit user", edit_user_path %></li>
      <li><%= link_to "Buy Items", bought_path %></li>
-     <li><%= link_to "Cart", buy_items_path %></li>
+     
      <li><%= link_to "退会する", leave_path, :method => 'post', data: { confirm: "You sure?" } %></li>
      
   <% end %>

@@ -27,6 +27,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'guard-rspec', require: false
   gem 'capybara', '~> 2.13'
+  gem 'simplecov'
 end
 
 group :development do

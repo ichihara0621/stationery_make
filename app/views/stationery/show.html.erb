@@ -22,12 +22,16 @@
 
       <br>
       <br>
-      <% if current_user.status == 0 %>
-      <%= link_to "delete", @stationery, method: :delete,
+      <% if current_user.nil? %>
+      
+      <% else %>
+        <% if current_user.status == 0 %>
+           <%= link_to "delete", @stationery, method: :delete,
                                   data: { confirm: "You sure?" } %>
-      <br>
-      <%= link_to "edit", edit_stationery_path %>
-      <% end %>
+          <br>
+         <%= link_to "edit", edit_stationery_path %>
+        <% end %>
+     
       </ol>
   </div>
      
@@ -46,8 +50,8 @@
       
       <%= f.submit "Order", class: "btn btn-primary" %>
          <% end %>
-         
-     <li><%= link_to "一覧", stationery_index_path %></li>
+    <% end %>   
+     
 　　</p>
 </aside>
 </div>

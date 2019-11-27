@@ -15,7 +15,11 @@
 
   <%= form_tag(stationery_index_path, :method => 'get' ) do %>
       <%= select_tag :category_id,
-                     options_from_collection_for_select(Category.all, :id, :name, params[:category_id]) %>
+                     options_from_collection_for_select(Category.all, :id, :name, params[:category_id]),
+                     {
+                       onchange: 'submit(this.form);'
+                     }
+      %> 
     <% end %>
    
   

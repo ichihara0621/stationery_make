@@ -3,7 +3,7 @@
     <%= link_to "stationery app", stationery_index_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "All Stationery", stationery_index_path %></li>
+        
         <li><%= link_to "Ranking", rankings_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Users", current_user %></li>
