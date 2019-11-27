@@ -3,8 +3,8 @@
     <%= link_to "stationery app", stationery_index_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", stationery_index_path %></li>
-        <li><%= link_to "Help", help_path %></li>
+        <li><%= link_to "All Stationery", stationery_index_path %></li>
+        <li><%= link_to "Ranking", rankings_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Users", current_user %></li>
           
@@ -26,8 +26,11 @@
           <%= link_to "Album", stationery_index_path %>
           <%= link_to "Diary", stationery_index_path %>
           <%= link_to "Eraser", stationery_index_path %></li>
-          
-          
+          <%= form_for(@stationery, url: insert_path) do |f| %>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+        <%= b.check_box + b.label %>
+    <% end %>
+    <% end %>
     
       </ul>
     </nav>

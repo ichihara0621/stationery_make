@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
        flash[:success] = '新しいアカウントを作ってください'
        redirect_to signup_path 
         
-      else
+    else
          if user && user.authenticate(params[:session][:password])
             log_in user
             redirect_to user

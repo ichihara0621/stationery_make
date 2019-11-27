@@ -7,12 +7,15 @@
      <br>
      <% @rankings.each do |stationery_sum| %>
 
-     
-     
-     count:
-     <%= stationery_sum.total_count %>
+     stationery ID
+     <%= stationery_sum.stationery_id %>
+     <%= hidden_field_tag :stationery_id, stationery_sum.stationery_id %>
      <br>
-        <br><br><br>
+     stationery name
+     <%= stationery_sum.stationery.name %>
+     
+     <br>
+        <br>
      <% end %>
 
     

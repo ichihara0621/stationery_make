@@ -33,15 +33,23 @@ class UsersController < ApplicationController
   end
 
   def bought
-    from = Time.now - 24.hour
-    to = Time.now
-    @buy_items = current_user.buy_items.paginate(page: params[:page]).order(created_at: "DESC").where(created_at: from..to)
+    user = current_user
+    if user.status == 0
+      @buy_items = BuyItem.paginate(page: params[:page]).order(created_at: "DESC").where(receive: false, send_status: true)
+
+
+    else
+       from = Time.now - 24.hour
+       to = Time.now
+       @buy_items = current_user.buy_items.paginate(page: params[:page]).order(created_at: "DESC").where(created_at: from..to, receive: true)
+    end 
   end
 
   def leave
     user = current_user
     if user.update_attribute(:status, 2)
        flash[:success] = "またのご利用お待ちしております。"
+       session[:user] = nil 
        redirect_to stationery_index_path
     else
       render 'new'
@@ -51,14 +59,36 @@ class UsersController < ApplicationController
 
   def cancel
     #user = current_user
-    debugger
-    buy_items = BuyItem.find(params[:id])
-    if buy_items.update_attribute(:receive, fault)
+    buy_item = BuyItem.find(params[:id])
+    if buy_item.update_attribute(:receive, false)
        flash[:success] = "注文を取り消しました"
        redirect_to bought_path
     else
       render 'new'
     end
+  end
+
+  def stop
+     BuyItem.transaction do
+        buy_item = BuyItem.find(params[:id])
+        debugger
+        return_count = buy_item.count
+        stationery_array = buy_item.stationery_id
+        @stock = Stock.find_by(stationery_id: stationery_array)
+        stock_count = @stock.count
+        new_stock = stock_count + return_count
+        @stock.update_attributes!(count: new_stock) 
+     
+         if buy_item.update_attribute(:send_status, false)
+            flash[:success] = "配送を中止します"
+            redirect_to bought_path
+         else
+           render 'new'
+         end
+     end
+   
+     rescue =>e
+      render 'new'
   end
 
   # パスワード再設定の属性を設定する

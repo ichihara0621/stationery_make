@@ -48,12 +48,19 @@ class StationeryController < ApplicationController
 
   def add 
     @buy_item = BuyItem.new(add_params)
-    if @buy_item.save
-      flash[:success] = "Buy Create"
-      redirect_to buy_items_path
-    else
-      render 'new'
+    stationery_id = @buy_item.stationery_id
+    buy_count = @buy_item.count
+    @stock = Stock.find_by(stationery_id: stationery_id)
+    stock_count = @stock.count
+    if stock_count >= buy_count
+       @buy_item.save
+         flash[:success] = "Buy Create"
+         redirect_to buy_items_path
+       
+    else flash[:notice] = "在庫数が不足しています"
+         redirect_to stationery_url(stationery_id)
     end 
+    
   end
 
   private

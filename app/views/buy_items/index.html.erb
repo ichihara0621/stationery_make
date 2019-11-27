@@ -2,13 +2,27 @@
 <div class="row">
   <aside class="col-md-4">
   <p>
-     Stationery Name:
+     
      <br>
      
      
     <% @buy_item.each do |item| %>
+    name
+    <%= item.stationery.name %>
+    <br>
+    price
+    <%= item.stationery.price %>
+    <br>
+    order count
     <%= item.count %>
-    s
+    <br>
+    total 
+    <%= item.count*item.stationery.price %>
+    <br>
+    <%= link_to "delete", "/buy_items/#{item.id}", method: :delete,
+                                  data: { confirm: "You sure?" } %> 
+
+    <br><br>
 
     
 <% end %>

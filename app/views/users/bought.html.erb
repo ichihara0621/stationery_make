@@ -13,6 +13,9 @@
     <br>
      price:
 　　  <%= items.stationery.price %>
+
+id:
+　　  <%= items.id %>
      <br>
      count:
      <%= items.count %>
@@ -23,11 +26,16 @@
      total price
      <%= items.count*items.stationery.price %> 
     <br>
-        <%= hidden_field_tag :id, @buy_items.id %>
-
-        <%= link_to "注文取消し", cancel_path, :method => 'post', data: { confirm: "You sure?" } %>
+    <% if current_user.status == 0 %>
+   <%= link_to "配送中止", "/stop/#{items.id}", :method => 'post', data: { confirm: "You sure?" } %>
+<br><br><br>
+    <% else current_user.status == 1 %>
+   <%= link_to "注文取消し", "/cancel/#{items.id}", :method => 'post', data: { confirm: "You sure?" } %>
    <br><br><br>
-     <% end %>
+    <% end %>
+
+      <% end %>
+
 
     
 

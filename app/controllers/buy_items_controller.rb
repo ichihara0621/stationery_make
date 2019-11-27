@@ -33,14 +33,14 @@ class BuyItemsController < ApplicationController
          stock_count = @stock.count
          new_stock = stock_count - buy_count
          @stock.update_attributes!(count: new_stock) 
+              
        end
-       
-         flash[:success] = "Stationery Buy"
-         redirect_to stationery_index_url
-    end
+        flash[:success] = "Stationery Buy"
+        redirect_to stationery_index_url
+      end
 
-    rescue =>e
-      render 'new'
+    rescue => e
+       render 'new'
        
   end
 
