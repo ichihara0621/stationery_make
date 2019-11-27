@@ -19,18 +19,7 @@
         <% end %>
         </ul>
         <br>
-          <li><%= link_to "Pen", stationery_index_path %>
-          <%= link_to "File", stationery_index_path %>
-          <%= link_to "Pencase", stationery_index_path %>
-          <%= link_to "Notebook", stationery_index_path %>
-          <%= link_to "Album", stationery_index_path %>
-          <%= link_to "Diary", stationery_index_path %>
-          <%= link_to "Eraser", stationery_index_path %></li>
-          <%= form_for(@stationery, url: insert_path) do |f| %>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
-        <%= b.check_box + b.label %>
-    <% end %>
-    <% end %>
+          
     
       </ul>
     </nav>

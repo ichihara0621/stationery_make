@@ -1,5 +1,7 @@
 class StationeryController < ApplicationController
-  
+  before_action :logged_in_user, only: [:destroy, :update, :edit, :create, :add]
+
+
   def show
     @stationery = Stationery.find(params[:id])
     @buy_item = BuyItem.new
@@ -12,7 +14,14 @@ class StationeryController < ApplicationController
   end
   
   def index
-    @stationery = Stationery.paginate(page: params[:page]).search(params[:search]).order(created_at: "DESC")
+    
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @stationery = @category.stationeries.paginate(page: params[:page]).order(created_at: "DESC").all
+      
+    else
+      @stationery = Stationery.paginate(page: params[:page]).search(params[:search]).order(created_at: "DESC")
+    end
   end
 
   def destroy
@@ -73,5 +82,12 @@ class StationeryController < ApplicationController
   def add_params
     params.require(:buy_item).permit(:count, :stationery_id, :user_id)
   end
+
+  def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
   
 end

@@ -18,11 +18,8 @@ class Stationery < ApplicationRecord
 
     def self.search(search)
       if search
-        Stationery.where(['name LIKE ?', "%#{search}%"])
+        Stationery.where(['name LIKE ?', "%#{search}%"])      
       
-      #elsif
-      #  Stationery.where(category_ids = )
-#
       else
         Stationery.all
         

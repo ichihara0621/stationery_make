@@ -22,10 +22,12 @@
 
       <br>
       <br>
+      <% if current_user.status == 0 %>
       <%= link_to "delete", @stationery, method: :delete,
                                   data: { confirm: "You sure?" } %>
       <br>
       <%= link_to "edit", edit_stationery_path %>
+      <% end %>
       </ol>
   </div>
      

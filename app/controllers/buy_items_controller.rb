@@ -1,5 +1,6 @@
 class BuyItemsController < ApplicationController
-  
+  before_action :logged_in_user, only: [:index, :create, :destroy]
+
   def index
     @buy_item = BuyItem.where(user_id: current_user, send_status: false, receive: true)
   end
@@ -52,5 +53,10 @@ class BuyItemsController < ApplicationController
 
   private
 
-
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
 end

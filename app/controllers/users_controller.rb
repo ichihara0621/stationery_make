@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show, :update, :edit, :bought, :leave, :cancel, :stop]
+
+
   def show
     @user = User.find(params[:id])
   end
@@ -36,8 +39,6 @@ class UsersController < ApplicationController
     user = current_user
     if user.status == 0
       @buy_items = BuyItem.paginate(page: params[:page]).order(created_at: "DESC").where(receive: false, send_status: true)
-
-
     else
        from = Time.now - 24.hour
        to = Time.now
@@ -113,4 +114,6 @@ class UsersController < ApplicationController
         redirect_to login_url
       end
     end
+
+    
 end
