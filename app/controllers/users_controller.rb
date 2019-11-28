@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show, :update, :edit, :bought, :leave, :cancel, :stop]
+  #before_action :logged_in_user, only: [:show, :update, :edit, :bought, :leave, :cancel, :stop]
 
 
   def show

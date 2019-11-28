@@ -7,6 +7,7 @@ class User < ApplicationRecord
   MAX_EMAIL_LEN = 255
   MAX_PASS_LEN = 15
   MIN_PASS_LEN = 6
+  MAX_ADDRESS_LEN = 255
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: MAX_NAME_LEN }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -15,7 +16,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: MIN_PASS_LEN, maximum: MAX_PASS_LEN }
-  validates :address, presence: true
+  validates :address, presence: true, length: { maximum: MAX_ADDRESS_LEN }
   
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

@@ -1,5 +1,6 @@
 class StationeryController < ApplicationController
   before_action :logged_in_user, only: [:destroy, :update, :edit, :create, :add]
+  before_action :admin_user, only: [:create, :edit, :new]
 
 
   def show
@@ -83,6 +84,8 @@ class StationeryController < ApplicationController
     params.require(:buy_item).permit(:count, :stationery_id, :user_id)
   end
 
-    
+  def admin_user
+      redirect_to(root_url) unless current_user.status == 0
+    end
   
 end
