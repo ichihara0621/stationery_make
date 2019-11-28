@@ -13,15 +13,17 @@ class BuyItemsController < ApplicationController
        end
      
        #paid_numberの発行
-       @paid_number = PaidNumber.new
-       @max = PaidNumber.maximum(:id) + 1
-       @paid_number = PaidNumber.new(id: @max)
-       @paid_number.save!
-       
+       PaidNumber.transaction do
+          @paid_number = PaidNumber.new
+          @max = PaidNumber.maximum(:id) + 1
+          @paid_number = PaidNumber.new(id: @max)
+          @paid_number.save!
+       end
+          
        #buy_itemsにpaid_numebrを入れる
        item_id.each do |k|
-         @buy_item = BuyItem.find(k)
-         @buy_item.update_attributes!(paid_number_id: @max)
+          @buy_item = BuyItem.find(k)
+          @buy_item.update_attributes!(paid_number_id: @max)
        end
        
        #Stockの計算
@@ -29,19 +31,29 @@ class BuyItemsController < ApplicationController
          buyitem = BuyItem.find(s)
          stationery_array = buyitem.stationery_id
          buy_count = buyitem.count
-   
-         @stock = Stock.find_by(stationery_id: stationery_array)
-         stock_count = @stock.count
-         new_stock = stock_count - buy_count
-         @stock.update_attributes!(count: new_stock) 
-              
-       end
+
+           Stock.transaction do
+            @stock = Stock.find_by(stationery_id: stationery_array)
+            stock_count = @stock.count
+            new_stock = stock_count - buy_count
+             if 0 > new_stock
+               flash[:notice] = "在庫数が不足しています"
+               redirect_to buy_items_path
+               
+             end   
+             @stock.update_attributes!(count: new_stock)    
+           end
+        end 
         flash[:success] = "Stationery Buy"
-        redirect_to stationery_index_url
+            redirect_to stationery_index_url
       end
+      
+        
 
     rescue => e
-       render 'new'
+      flash[:notice] = "購入し直してください"
+        buy_items_path and return
+        
        
   end
 

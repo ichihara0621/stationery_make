@@ -9,6 +9,17 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("Sign up")
   end
 
+  scenario "ログイン前は右上がLoginであること" do
+    visit stationery_index_path
+    expect(page).to have_content("Log in")
+  end
+
+  scenario "ログイン後は右上がLogoutであること" do
+    user_login
+    visit stationery_index_path
+    expect(page).to have_content("Log out")
+  end
+
   scenario "ユーザー登録できること" do
     user = FactoryBot.build(:user)
 
@@ -38,15 +49,96 @@ RSpec.feature "Users", type: :feature do
 
   end
 
+  scenario "名前が空白なら登録できないこと" do
+    visit new_user_path
+
+    fill_in "Name", with: ""
+    fill_in "Email", with: "email@email.com"
+    fill_in "Address", with: "aaaaa"
+    fill_in "Password", with: "aaaaaa"
+    fill_in "Confirmation", with: "aaaaaa"
+    click_button "Create my account"
+
+    expect(page).to have_content("can't be blank")
+
+  end
+
+  scenario "メールアドレスが空白なら登録できないこと" do
+    visit new_user_path
+
+    fill_in "Name", with: "aaaaa"
+    fill_in "Email", with: ""
+    fill_in "Address", with: "aaaaa"
+    fill_in "Password", with: "aaaaaa"
+    fill_in "Confirmation", with: "aaaaaa"
+    click_button "Create my account"
+
+    expect(page).to have_content("can't be blank")
+
+  end
+
+  scenario "住所が空白なら登録できないこと" do
+    visit new_user_path
+
+    fill_in "Name", with: "aaaaa"
+    fill_in "Email", with: "email@email.com"
+    fill_in "Address", with: ""
+    fill_in "Password", with: "aaaaaa"
+    fill_in "Confirmation", with: "aaaaaa"
+    click_button "Create my account"
+
+    expect(page).to have_content("can't be blank")
+
+  end
+
+  scenario "パスワードが空白なら登録できないこと" do
+    visit new_user_path
+
+    fill_in "Name", with: "aaaaa"
+    fill_in "Email", with: "email@email.com"
+    fill_in "Address", with: "aaaaa"
+    fill_in "Password", with: ""
+    fill_in "Confirmation", with: "aaaaaa"
+    click_button "Create my account"
+
+    expect(page).to have_content("can't be blank")
+
+  end
+
+  scenario "Confirmationが空白なら登録できないこと" do
+    visit new_user_path
+
+    fill_in "Name", with: "aaaaa"
+    fill_in "Email", with: "email@email.com"
+    fill_in "Address", with: "aaaaa"
+    fill_in "Password", with: "aaaaaa"
+    fill_in "Confirmation", with: ""
+    click_button "Create my account"
+
+    expect(page).to have_content("doesn't match Password")
+
+  end
+
+  scenario "パスワードとConfirmationが不一致なら登録できないこと" do
+    visit new_user_path
+
+    fill_in "Name", with: "aaaaa"
+    fill_in "Email", with: "email@email.com"
+    fill_in "Address", with: "aaaaa"
+    fill_in "Password", with: "aaaaaa"
+    fill_in "Confirmation", with: "aaaaaaaaaa"
+    click_button "Create my account"
+
+    expect(page).to have_content("doesn't match Password")
+  end
+
+  
+
+  
+
   scenario "正しいemailとパスワードでログイン成功" do
     
-    user = FactoryBot.create(:user)
-    
-    visit login_path
-     
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
-      click_button "Log in"
+    user_login
   
       expect(page).to have_content("退会")
   
@@ -80,13 +172,7 @@ RSpec.feature "Users", type: :feature do
   end
 
   scenario "adminユーザーがログインした時、アドミンホームに遷移できること" do
-    user = FactoryBot.create(:admin)
-
-    visit login_path
-  
-      fill_in "Email", with: "admin@example.org"
-      fill_in "Password", with: "ichihara"
-      click_button "Log in"
+    admin_login
   
       expect(page).to have_content("Stop receive")
   

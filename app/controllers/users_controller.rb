@@ -70,26 +70,31 @@ class UsersController < ApplicationController
   end
 
   def stop
-     BuyItem.transaction do
-        buy_item = BuyItem.find(params[:id])
-        debugger
-        return_count = buy_item.count
-        stationery_array = buy_item.stationery_id
+     #BuyItem.transaction do
+        @buy_item = BuyItem.find(params[:id])
+        
+        return_count = @buy_item.count
+        stationery_array = @buy_item.stationery_id
         @stock = Stock.find_by(stationery_id: stationery_array)
         stock_count = @stock.count
         new_stock = stock_count + return_count
         @stock.update_attributes!(count: new_stock) 
-     
-         if buy_item.update_attribute(:send_status, false)
+        if @buy_item.update_attribute(:send_status, false)
             flash[:success] = "配送を中止します"
             redirect_to bought_path
          else
            render 'new'
          end
-     end
+         
+     #end
+     
+    #flash[:success] = "配送を中止します"
+    #redirect_to bought_path
+        
    
-     rescue =>e
-      render 'new'
+     #rescue =>e
+     # redirect_to stationery_index_path
+      
   end
 
   # パスワード再設定の属性を設定する

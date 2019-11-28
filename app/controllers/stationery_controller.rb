@@ -62,14 +62,24 @@ class StationeryController < ApplicationController
     buy_count = @buy_item.count
     @stock = Stock.find_by(stationery_id: stationery_id)
     stock_count = @stock.count
-    if stock_count >= buy_count
-       @buy_item.save
-         flash[:success] = "Buy Create"
-         redirect_to buy_items_path
-       
-    else flash[:notice] = "在庫数が不足しています"
-         redirect_to stationery_url(stationery_id)
-    end 
+
+    if buy_count.nil?
+      flash[:success] = "購入数を入れてください"
+      redirect_to stationery_url(stationery_id)
+    elsif
+      0 >=  buy_count
+      flash[:success] = "いじわるしないでください"
+      redirect_to stationery_url(stationery_id)
+    else
+       if stock_count >= buy_count 
+          @buy_item.save
+            flash[:success] = "Buy Create"
+            redirect_to buy_items_path
+          
+       else flash[:notice] = "在庫数が不足しています"
+            redirect_to stationery_url(stationery_id)
+       end 
+    end
     
   end
 
