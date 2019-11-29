@@ -1,9 +1,9 @@
-#User.create!(name:  "Example User",
-#             email: "example@railstutorial.org",
-#             address: "tokyo",
-#             password:              "foobar",
-#             password_confirmation: "foobar",
-#             status: 0)
+User.create!(name:  "Example User",
+             email: "example@railstutorial.org",
+             address: "tokyo",
+             password:              "foobar",
+             password_confirmation: "foobar",
+             status: 0)
 #
 #100.times do |n|
 #  name  = "user#{n+1}"
@@ -19,11 +19,11 @@
 #               status: status)
 #end
 #
-#Stationery.create!(name:  "pentel pen",
-#                   price: "100",
-#                   maker: "pentel",
-#                   detail: "smooth writing pen")
-#
+Stationery.create!(name:  "pentel pen",
+                   price: "100",
+                   maker: "pentel",
+                   detail: "smooth writing pen")
+
 #
 #1000.times do |n|
 #  name  = "stationery#{n+1}"
@@ -58,14 +58,14 @@
 
   
 
-#Category.create!([{name:  "Pen"},
-#                  {name:  "File"},
-#                  {name:  "Pencase"},
-#                  {name:  "Notebook"},
-#                  {name:  "Album"},
-#                  {name:  "Diary"},
-#                  {name:  "Eraser"}])
-#
+Category.create!([{name:  "Pen"},
+                  {name:  "File"},
+                  {name:  "Pencase"},
+                  {name:  "Notebook"},
+                  {name:  "Album"},
+                  {name:  "Diary"},
+                  {name:  "Eraser"}])
+
 #
 ##ranking
 #10.times do |n|
@@ -90,7 +90,7 @@
 
 #stationery_category
 #StationeryCategory.create!(stationery_id: 1,
-#                           category_id: 5)
+ #                         category_id: 5)
 #1001.times do |n|
 #category_id = rand(1..7)
 #for n in (2..1001)

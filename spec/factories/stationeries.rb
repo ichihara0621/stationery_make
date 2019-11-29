@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :stationery do
+    id {1}
     name { "sample" }
     price { 100 }
     maker { "sample maker" }

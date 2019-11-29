@@ -13,11 +13,11 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("Create")
   end
 
-  scenario "ログイン後マイページに遷移し、Penが表示できるか" do
-    admin_login
-    click_link "Add Stationery"
-    expect(page).to have_content("Pen")
-  end
+  #scenario "ログイン後マイページに遷移し、Penが表示できるか" do
+  #  admin_login
+  #  click_link "Add Stationery"
+  #  expect(page).to have_content("Pen")
+  #end
 
   scenario "ログイン後マイページに遷移し、文房具が追加できるか" do
     admin_login
@@ -35,6 +35,15 @@ RSpec.feature "Users", type: :feature do
 
     
   end
+  
+  scenario "ログイン後マイページに遷移し、文房具追加が表示できるか" do
+    stationery = FactoryBot.create(:stationery)
+    admin_login
+    click_link "stationery app"
+    visit ('/stationery/1')
+    expect(page).to have_content("sample")
+  end
+
 
 
 

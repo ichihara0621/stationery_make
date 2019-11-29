@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20191127063307) do
     t.index ["user_id"], name: "index_buy_items_on_user_id"
   end
 
+  create_table "carts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "total_price"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -84,6 +92,7 @@ ActiveRecord::Schema.define(version: 20191127063307) do
 
   add_foreign_key "buy_items", "stationeries"
   add_foreign_key "buy_items", "users"
+  add_foreign_key "carts", "users"
   add_foreign_key "rankings", "stationeries"
   add_foreign_key "stationery_categories", "categories"
   add_foreign_key "stationery_categories", "stationeries"
