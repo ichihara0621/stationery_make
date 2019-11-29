@@ -1,0 +1,76 @@
+<% provide(:title, "Bought Items") %>
+<div class="row">
+  <aside class="col-md-4">
+  <% if  current_user.status == 0 %>
+  <h1>キャンセル一覧</h1>
+  <%= current_user.name %>
+  <%= will_paginate @buy_items_admin  %>
+
+<br>
+     <% @buy_items_admin.each do |items| %>
+
+     Stationery Name:
+     <%= items.stationery.name %>
+    <br>
+     price:
+　　  <%= items.stationery.price %>
+
+id:
+　　  <%= items.id %>
+     <br>
+     count:
+     <%= items.count %>
+     <br>
+     date:
+     <%= items.created_at%>
+     <br>
+     total price
+     <%= items.count*items.stationery.price %> 
+    <br>
+    <%= link_to "配送中止", "/stop/#{items.id}", :method => 'post', data: { confirm: "You sure?" } %>
+   <br><br><br>
+  <% end %>
+  <li><%= link_to "一覧", stationery_index_path %></li>
+  <p>
+      <br>
+      <br>
+      <%= will_paginate @buy_items_admin %>
+      
+  
+
+  <% else current_user.status == 1 %>
+  <h1>購入一覧</h1>
+  <%= current_user.name %>
+  <%= will_paginate @buy_items_user  %>
+
+<br>
+     <% @buy_items_user.each do |items| %>
+
+     Stationery Name:
+     <%= items.stationery.name %>
+    <br>
+     price:
+　　  <%= items.stationery.price %>
+
+id:
+　　  <%= items.id %>
+     <br>
+     count:
+     <%= items.count %>
+     <br>
+     date:
+     <%= items.created_at%>
+     <br>
+     total price
+     <%= items.count*items.stationery.price %> 
+    <br>
+    <%= link_to "注文取消し", "/cancel/#{items.id}", :method => 'post', data: { confirm: "You sure?" } %>
+   <br><br><br>
+  <% end %>
+  <li><%= link_to "一覧", stationery_index_path %></li>
+  <p>
+      <br>
+      <br>
+      <%= will_paginate @buy_items_user %>
+      
+  <% end %>

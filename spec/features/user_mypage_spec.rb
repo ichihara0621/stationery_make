@@ -81,12 +81,34 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("All")
   end
 
-  scenario "ログインユーザーが登録情報を" do
+  scenario "ログイン後マイページに遷移し、購入一覧が表示できるか" do
     user_login
-    click_link "stationery app"
-    expect(page).to have_content("All")
+    click_link "Buy Items"
+    expect(page).to have_content("購入")
   end
 
+  scenario "ログインユーザーが登録情報を変更できること" do
+    user_login
+    click_link "Edit user"
 
+    fill_in "Name", with: "test"
+    fill_in "Email", with: "test@example.org"
+    fill_in "Address", with: "tatata"
+    fill_in "Password", with: "ichihara"
+    click_button "Update"
+
+    expect(page).to have_content("tatata")
+  end
+
+  #scenario "ログインユーザーが注文取消しできること" do
+  #  let(:login_user) { create(:login_user) }
+  #  let(:) { create(:message, user: user, group: user.groups.first) }
+  #  user2_login
+  #  click_link "Buy Items"
+  #  click_link "注文取消し"
+#
+  #  expect(page).to have_content("取り消しました")
+  #end
+  #
 
 end

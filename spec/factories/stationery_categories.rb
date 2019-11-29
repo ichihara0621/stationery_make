@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :stationery_category do
-    stationery { nil }
-    ranking { nil }
+    category
+    stationery 
+    
   end
 end

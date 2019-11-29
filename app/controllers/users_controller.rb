@@ -35,16 +35,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def bought
-    user = current_user
-    if user.status == 0
-      @buy_items = BuyItem.paginate(page: params[:page]).order(created_at: "DESC").where(receive: false, send_status: true)
-    else
-       from = Time.now - 24.hour
-       to = Time.now
-       @buy_items = current_user.buy_items.paginate(page: params[:page]).order(created_at: "DESC").where(created_at: from..to, receive: true)
-    end 
-  end
+  #def bought
+  #  user = current_user
+  #  #user_all = User.all
+  #  if user.status == 0
+  #    buy_items_admin = BuyItem.paginate(page: params[:page]).order(created_at: "DESC").where(receive: false, send_status: true)
+  #  else
+  #     from = Time.now - 24.hour
+  #     to = Time.now
+  #     @buy_items_user = buy_items.paginate(page: params[:page], per_page: 5).order(created_at: "DESC").where(created_at: from..to, receive: true)
+  #  end 
+  #end
 
   def leave
     user = current_user

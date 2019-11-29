@@ -15,11 +15,9 @@ class StationeryController < ApplicationController
   end
   
   def index
-    
     if params[:category_id]
       @category = Category.find(params[:category_id])
       @stationery = @category.stationeries.paginate(page: params[:page]).order(created_at: "DESC").all
-      
     else
       @stationery = Stationery.paginate(page: params[:page]).search(params[:search]).order(created_at: "DESC")
     end
@@ -33,7 +31,6 @@ class StationeryController < ApplicationController
   
   def create
     @stationery = Stationery.new(stationery_params)
-    
     if @stationery.save
       flash[:success] = "Stationery Create"
       redirect_to stationery_url(@stationery)

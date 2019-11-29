@@ -37,14 +37,14 @@ RSpec.describe User, type: :model do
    it "メールアドレスが一意であること" do
     user = User.create(
       name: "ichihara misato",
-      email: 'ichihara.misato@lminejp',
+      email: 'ichihara.misato@lmin.ejp',
       address: "ibaraki",
       password: 'ichiharamisato',
       password_confirmation: 'ichiharamisato'
     )
     user = User.new(
       name: "ichihara",
-      email: 'ichihara.misato@lminejp',
+      email: 'ichihara.misato@lmin.ejp',
       address: "ibar",
       password: 'ichihara',
       password_confirmation: 'ichihara'
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
    it "メールアドレスが小文字と大文字同じなこと（小文字登録後大文字で登録できないこと）" do
     user = User.create(
       name: "ichihara misato",
-      email: 'ichihara.misato@lminejp',
+      email: 'ichihara.misato@lmin.ejp',
       address: "ibaraki",
       password: 'ichiharamisato',
       password_confirmation: 'ichiharamisato'
@@ -64,7 +64,7 @@ RSpec.describe User, type: :model do
 
     user = User.new(
       name: "ichihara",
-      email: 'ichihara.MISATO@lminejp',
+      email: 'ichihara.MISATO@lmin.ejp',
       address: "ibar",
       password: 'ichihara',
       password_confirmation: 'ichihara'

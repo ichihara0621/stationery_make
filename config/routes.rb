@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get  '/insert',  to: 'stationery#new'
   post '/insert',  to: 'stationery#create'
-  get  '/bought',  to: 'users#bought'
+  get  '/bought',  to: 'buy_items#bought'
   #get   '/add',    to: 'stationery#incart'
   post  '/add',    to: 'stationery#add'
   post  '/buy',    to: 'buy_items#change'

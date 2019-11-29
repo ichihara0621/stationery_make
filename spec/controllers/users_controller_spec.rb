@@ -36,27 +36,91 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "POST #create" do
-      it 'リクエストは302 リダイレクトとなること' do
-          @user = FactoryBot.create(:login_user)
-
-        post :create, params: {user: attributes_for(:user)}
-        expect(response.status).to eq 302
-      end
+      
       it 'データベースに新しいユーザーが登録されること' do
-            @user = FactoryBot.create(:login_user)
+            #@user = FactoryBot.create(:into_user)
 
         expect{
           post :create, params: {user: attributes_for(:user)}
         }.to change(User, :count).by(1)
       end
+
       it 'showにリダイレクトすること' do
-            @user = FactoryBot.create(:login_user)
+            #@user = FactoryBot.create(:into_user)
 
         post :create, params: {user: attributes_for(:user)}
-        expect(response).to redirect_to ("/user/1")
+        
+        expect(response).to redirect_to "http://test.host/users/2"
       end
   end
 
+  describe "edit"   do
+    it "レスポンスが正常か" do
+      @user = FactoryBot.create(:user)
+      get :edit, params: {id: @user.id}
+      expect(response).to have_http_status(:success)
+    end
+
+  end
+  
+  describe "#update" do
+     it "正常にユーザーを更新できるか" do
+      @user = FactoryBot.create(:user)
+      user_params = {name: @user}
+      patch :update, params: {id:@user.id, name: "aaaa", email:@user.email, 
+                              address:@user.address, password: @user.password, password_confirmation: @user.password}
+      expect(@user.reload.name).to eq "aaa"
+     end
+
+
+  end
+
+  describe "POST #leave"  do
+    let!(:user) { create(:user) }
+    let(:update_attributes) do
+    {status: 2}
+    end
+
+     it "正常にstatusがアップデートされるか" do
+      @user = FactoryBot.create(:user)
+       patch :update, params: {id: @user.id, name: @user.name, 
+                               email: @user.email, address: @user.address, password: @user.password}
+       user.reload
+       expect(@user.status).to eq update_attributes[:status]
+    end
+  end
+
+  describe "POST #cancel"  do
+    it "正常にreceiveがアップデートされるか" do
+    
+    
+    end
+
+  end
+
+  describe "POST #stop"  do
+    it "正常にsend_statusがアップデートされるか" do
+    
+    
+    end
+
+  end
+
+  describe "GET #bought"  do
+    it "userの時、購入品が表示されるか" do
+    
+    
+    end
+
+  end
+
+  describe "GET #bought"  do
+    it "adminの時、キャンセルが表示されるか" do
+    
+    
+    end
+
+  end
 
 
 
