@@ -5,6 +5,8 @@ FactoryBot.define do
     maker { "sample maker" }
     detail { "sample pen is sample" }
 
+    factory :stationery_with_stock
+
     after(:create) do |stock|
       create(:stock, stationery:stationery)
     end

@@ -13,7 +13,13 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("Create")
   end
 
-  scenario "ログイン後マイページに遷移し、文房具追加が表示できるか" do
+  scenario "ログイン後マイページに遷移し、Penが表示できるか" do
+    admin_login
+    click_link "Add Stationery"
+    expect(page).to have_content("Pen")
+  end
+
+  scenario "ログイン後マイページに遷移し、文房具が追加できるか" do
     admin_login
     click_link "Add Stationery"
 
@@ -21,10 +27,11 @@ RSpec.feature "Users", type: :feature do
     fill_in "Price", with: "100"
     fill_in "Detail", with: "100"
     fill_in "Maker", with: "test"
-    #fill_in "Stock", with: "100"
-    #fill_in "Ranking total count", with: "0"
-    checked_field "Category", with: "Pen"
-    expect(page).to have_content("Create")
+    fill_in "stationery[stock_attributes][count]", with: "100"
+    fill_in "stationery[ranking_attributes][total_count]", with: "0"
+    #check "stationery[category_ids][1]"
+    click_button "Create new stationery"
+    expect(page).to have_content("Stationery Create")
 
     
   end

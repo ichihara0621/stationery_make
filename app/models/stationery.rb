@@ -4,7 +4,7 @@ class Stationery < ApplicationRecord
     accepts_nested_attributes_for :buy_items
     has_many :stationery_categories, dependent: :destroy
     has_many :categories, through: :stationery_categories
-    accepts_nested_attributes_for :stationery_categories, allow_destroy: true
+    accepts_nested_attributes_for :categories, allow_destroy: true
     has_one  :stock, dependent: :destroy
     accepts_nested_attributes_for :stock, allow_destroy: true
     has_one  :ranking, dependent: :destroy

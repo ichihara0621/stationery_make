@@ -1,6 +1,6 @@
 class StationeryController < ApplicationController
-  before_action :logged_in_user, only: [:destroy, :update, :edit, :create, :add]
-  before_action :admin_user, only: [:create, :edit, :new]
+  #before_action :logged_in_user, only: [:destroy, :update, :add]
+  #before_action :admin_user, only: [:create, :edit, :new]
 
 
   def show
@@ -31,6 +31,7 @@ class StationeryController < ApplicationController
   
   def create
     @stationery = Stationery.new(stationery_params)
+    
     if @stationery.save
       flash[:success] = "Stationery Create"
       redirect_to stationery_url(@stationery)
@@ -83,7 +84,8 @@ class StationeryController < ApplicationController
   private
 
   def stationery_params
-    params.require(:stationery).permit(:name, :price, :detail, :maker, category_ids: [],
+    params.require(:stationery).permit(:name, :price, :detail, :maker,
+      #category_ids: [])
     stock_attributes: [:id, :count], ranking_attributes: [:id, :total_count])
   end
 

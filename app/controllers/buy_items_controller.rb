@@ -1,5 +1,5 @@
 class BuyItemsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :create, :destroy]
+  #before_action :logged_in_user, only: [:index, :create, :destroy]
 
 
   def bought

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post  '/cancel/:id', to: 'users#cancel'
   post  '/stop/:id', to: 'users#stop'
 
-  resources :stationery
+  resources :stationery, :except => ['create','new']
   resources :password_resets
   resources :buy_items
   resources :rankings
