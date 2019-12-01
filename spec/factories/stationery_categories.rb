@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :stationery_category do
-    category
-    stationery 
+    #category
+    #stationery 
     
   end
 end

@@ -3,7 +3,7 @@ FactoryBot.define do
     count { 1 }
     send_status { true }
     receive { true }
-    stationery
-    login_user
+    #stationery
+    #login_user
   end
 end
