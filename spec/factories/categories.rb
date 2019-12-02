@@ -1,5 +1,11 @@
 FactoryBot.define do
   factory :category do
-    name { "MyString" }
+    id {1}
+    name { "Pen" }
+  end
+
+  factory :album, class: Category do
+    id {2}
+    name { "Album" }
   end
 end

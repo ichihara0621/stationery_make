@@ -1,6 +1,6 @@
 class StationeryController < ApplicationController
-  before_action :logged_in_user, only: [:destroy, :update, :add]
-  before_action :admin_user, only: [:create, :edit, :new]
+  before_action :logged_in_user, only: [:add]
+  before_action :admin_user, only: [:create, :edit, :new, :update, :destroy]
 
 
   def show
@@ -93,7 +93,11 @@ class StationeryController < ApplicationController
   end
 
   def admin_user
+    if current_user.nil?
+      redirect_to signup_path 
+    else
       redirect_to(root_url) unless current_user.status == 0
     end
+  end
   
 end

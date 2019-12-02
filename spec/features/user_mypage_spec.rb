@@ -100,14 +100,4 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("tatata")
   end
 
-  scenario "ログインユーザーが注文取消しできること" do
-
-    user2_login
-    click_link "Buy Items"
-    click_link "注文取消し"
-
-    expect(page).to have_content("取り消しました")
-  end
-  
-
 end

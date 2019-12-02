@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :update, :edit, :bought, :leave, :cancel, :stop]
+  before_action :admin_user, only: [:stop]
 
 
   def show
@@ -99,11 +100,11 @@ class UsersController < ApplicationController
   end
 
   # パスワード再設定の属性を設定する
-  def create_reset_digest
-    self.reset_token = User.new_token
-    update_attribute(:reset_digest,  User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
-  end
+  #def create_reset_digest
+  #  self.reset_token = User.new_token
+  #  update_attribute(:reset_digest,  User.digest(reset_token))
+  #  update_attribute(:reset_sent_at, Time.zone.now)
+  #end
 
   private
 

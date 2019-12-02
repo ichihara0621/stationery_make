@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Stationeries", type: :feature do
   scenario "ログインユーザーが文房具詳細を見れるか" do
-      stationery = FactoryBot.create(:stationery)
+      stationery = FactoryBot.create(:pen_tel)
       user_login
       click_link "stationery app"
       click_link "sample_pen_tel"
@@ -21,7 +21,7 @@ RSpec.feature "Stationeries", type: :feature do
       expect(page).to have_content("total 1000")
   end
 
-  scenario "ログインユーザーが在校数より多い文房具を購入できないこと" do
+  scenario "ログインユーザーが在庫数より多い文房具を購入できないこと" do
       admin_create_stationery
       user_login
       click_link "stationery app"

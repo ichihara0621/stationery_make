@@ -10,6 +10,17 @@ FactoryBot.define do
     
   end
 
+  factory :new_user, class: User do
+    id {2}
+    name { "taaa" }
+    email { "test@example.org" }
+    address { "suginami" }
+    password { "ichihara" }
+    password_confirmation { "ichihara" }
+    status {1}
+    
+  end
+
   factory :admin, class: User do
     id {1}
     name { "admin" }
@@ -21,7 +32,7 @@ FactoryBot.define do
   end
 
   factory :login_user, class: User do
-    id {1}
+    id {5}
     name { "aiue" }
     email { "aiue@example.org" }
     address { "suginami" }
@@ -29,9 +40,9 @@ FactoryBot.define do
     password_confirmation { "ichihara" }
     status {1}
 
-    after(:create) do |login_user|
-      create(:buy_item, login_user: login_user)
-    end
+    #after(:create) do |login_user|
+    #  create(:buy_item, login_user: login_user)
+    #end
     
   end
 

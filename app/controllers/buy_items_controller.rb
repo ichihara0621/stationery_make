@@ -14,12 +14,11 @@ class BuyItemsController < ApplicationController
     end 
   end
 
-  def index
+  def index #カート内一覧
     @buy_item = BuyItem.where(user_id: current_user, send_status: false, receive: true)
   end
 
-  def create
-    
+  def create  
     BuyItem.transaction(joinable: false, requires_new: true) do
        item_id = BuyItem.select("id").where(user_id: current_user, send_status: false, receive: true).ids
        item_id.each do |k|

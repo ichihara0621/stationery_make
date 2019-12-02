@@ -18,6 +18,7 @@ gem 'jbuilder',     '2.7.0'
 gem 'mysql2', '>= 0.3.18', '< 0.6.0'
 gem 'activerecord-import'
 gem 'whenever', :require => false
+gem 'devise'
 
 group :development, :test do
   #gem 'sqlite3', '1.3.13'
@@ -38,6 +39,7 @@ group :development do
 end
 
 group :test do
+  
   gem 'rails-controller-testing', '1.0.2'
   gem 'minitest',                 '5.10.3'
   gem 'minitest-reporters',       '1.1.14'

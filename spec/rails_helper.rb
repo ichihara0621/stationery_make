@@ -91,7 +91,10 @@ end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include UserHelpers
-  
+  config.include Devise::TestHelpers, type: :controller
+  config.include ControllerMacros, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
@@ -124,3 +127,7 @@ RSpec.configure do |config|
 
 
 end
+
+
+require 'devise'
+require File.expand_path("spec/support/controller_macros.rb")
